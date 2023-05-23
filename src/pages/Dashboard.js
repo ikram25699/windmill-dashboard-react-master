@@ -34,6 +34,7 @@ import axios from 'axios'
 function Dashboard() {
   
   const history = useHistory();
+  const history2=useHistory();
   const [page, setPage] = useState(1)
   const [data, setData] = React.useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -64,7 +65,7 @@ function Dashboard() {
         .delete(`https://localhost:7075/api/FileAPI/${id}`)
         .then(response => {
           if (response.status === 200) {
-            history.push('/dashboard')
+            history2.push('/app/dashboard')
           }
         })
         .catch(error => {
