@@ -38,7 +38,7 @@ function Blank() {
     <div className="flex justify-center items-center h-screen">
       <div className="w-96 mx-auto p-8 bg-gray-100 border rounded-lg">
         <input type="file" onChange={onFileSelect} />
-        <Button onClick={onFileUpload}>Upload</Button>
+        <Button className="bg-red-500"   onClick={onFileUpload}>Upload</Button>
       </div>
     </div>
     

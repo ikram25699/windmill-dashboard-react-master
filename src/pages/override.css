@@ -26,10 +26,20 @@
    color: '#6ebeb0' ;
 
 }
+.bg-red-500
+{
+  background-color:  rgb(110,190,176);
+}
 .prestation-heading
 {
 
   color:red;
+}
+.forgot-psw 
+{
+  font-size: medium;
+  font-weight:bold;
+  color: rgb(110,190,176);;
 }
 .show-file-table td {
   

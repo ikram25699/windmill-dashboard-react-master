@@ -26,7 +26,7 @@ function Buttons() {
         </div>
 
         <div>
-          <Button>Regular</Button>
+          <Button className="bg-red-500"  >Regular</Button>
         </div>
 
         <div>

@@ -62,7 +62,7 @@ function Dashboard() {
 
     const handleDeleteFile = (id) => {
       axios
-        .delete(`https://localhost:7075/api/FileAPI/${id}`)
+        .delete(`http://localhost:5248/api/FileAPI/${id}`)
         .then(response => {
           if (response.status === 200) {
             history2.push('/app/dashboard')
@@ -76,7 +76,7 @@ function Dashboard() {
     
 
     const show = () => {
-      axios.get("https://localhost:7075/api/FileAPI")
+      axios.get("http://localhost:5248/api/FileAPI")
         .then(response => {
           const data = response.data;
           console.log(data);

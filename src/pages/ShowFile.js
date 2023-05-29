@@ -25,7 +25,7 @@ const ShowFile = () => {
     const [recordErrors, setRecordErrors] = useState({});
     //get seg200
     useEffect(() => {
-        axios.get(`https://localhost:7075/api/customer/Getseg200?Fileid=${id}`)
+        axios.get(`http://localhost:5248/api/customer/Getseg200?Fileid=${id}`)
           .then(response => {
             const data = response.data;
             console.log(data);
@@ -59,7 +59,7 @@ const ShowFile = () => {
       };
     //get seg300
     useEffect(() => {
-      axios.get(`https://localhost:7075/api/customer/Getseg300?Fileid=${id}`)
+      axios.get(`http://localhost:5248/api/customer/Getseg300?Fileid=${id}`)
         .then(response => {
           const data = response.data;
           console.log(data);
@@ -74,7 +74,7 @@ const ShowFile = () => {
 
     //get rec10 
   useEffect(() => {
-    axios.get(`https://localhost:7075/api/customer/GetRec10?Fileid=${id}`)
+    axios.get(`http://localhost:5248/api/customer/GetRec10?Fileid=${id}`)
       .then(response => {
         const data = response.data;
         console.log(data);
@@ -88,7 +88,7 @@ const ShowFile = () => {
   const descriptionKeys10 = Object.keys(Seg10);
 //get rec90
 useEffect(() => {
-  axios.get(`https://localhost:7075/api/customer/GetRec90?Fileid=${id}`)
+  axios.get(`http://localhost:5248/api/customer/GetRec90?Fileid=${id}`)
     .then(response => {
       const data = response.data;
       console.log(data);
@@ -102,7 +102,7 @@ useEffect(() => {
 const descriptionKeys90 = Object.keys(Seg90);
 //get rec91
 useEffect(() => {
-  axios.get(`https://localhost:7075/api/customer/GetRec91?Fileid=${id}`)
+  axios.get(`http://localhost:5248/api/customer/GetRec91?Fileid=${id}`)
     .then(response => {
       const data = response.data;
       console.log(data);
@@ -114,7 +114,7 @@ useEffect(() => {
 }, [id]);
 //get rec92
 useEffect(() => {
-  axios.get(`https://localhost:7075/api/customer/GetRec92?Fileid=${id}`)
+  axios.get(`http://localhost:5248/api/customer/GetRec92?Fileid=${id}`)
     .then(response => {
       const data = response.data;
       console.log(data);
@@ -131,7 +131,7 @@ const descriptionKeys92 = Object.keys(rec92);
 //get attestation 
    const getAttestations = () => {
     
-    const url = `https://localhost:7075/api/FileAPI/api/customer/GetFileAttestations?Fileid=${id}`;
+    const url = `http://localhost:5248/api/FileAPI/api/customer/GetFileAttestations?Fileid=${id}`;
     
     axios.get(url)
       .then(response => {
@@ -152,7 +152,7 @@ const descriptionKeys92 = Object.keys(rec92);
 
 const getRecordData = async (recordId) => {
   try {
-    const url = `https://localhost:7075/api/FileAPI/api/customer/GetRecordDataID?recid=${recordId}`;
+    const url = `http://localhost:5248/api/FileAPI/api/customer/GetRecordDataID?recid=${recordId}`;
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
@@ -162,7 +162,7 @@ const getRecordData = async (recordId) => {
 };
 const getRecordErrorsByID = async (recordId) => {
   try {
-    const url = `https://localhost:7075/api/customer/GetRecordErrrorsByID?recid=${recordId}`;
+    const url = `http://localhost:5248/api/customer/GetRecordErrrorsByID?recid=${recordId}`;
     const response = await axios.get(url);
     return response.data;
   } catch (error) {

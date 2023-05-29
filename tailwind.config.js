@@ -4,6 +4,10 @@ const windmill = require('@windmill/react-ui/config')
 module.exports = windmill({
   purge: ['src/**/*.js'],
   theme: {
+    colors: {
+      // Configure your color palette here
+      DEFAULT: '#34D399',
+    },
     extend: {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
