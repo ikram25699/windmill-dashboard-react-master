@@ -23,6 +23,16 @@ const ShowFile = () => {
     const [showMoreRecord, setShowMoreRecord] = useState(false);
     const toggleShowMoreRecord = () => setShowMoreRecord(!showMoreRecord);
     const [recordErrors, setRecordErrors] = useState({});
+    const [token, setToken] = useState('');
+    useEffect(() => {
+    
+      // Retrieve token from localStorage
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
+        setToken(token);
+      }
+      
+    }, []);
     //get seg200
     useEffect(() => {
         axios.get(`http://localhost:5248/api/customer/Getseg200?Fileid=${id}`)
@@ -132,8 +142,12 @@ const descriptionKeys92 = Object.keys(rec92);
    const getAttestations = () => {
     
     const url = `http://localhost:5248/api/FileAPI/api/customer/GetFileAttestations?Fileid=${id}`;
-    
-    axios.get(url)
+    const token = localStorage.getItem('token');
+    axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the request headers
+      },
+    })
       .then(response => {
         const data = response.data;
         setAttestation(data);
@@ -152,8 +166,13 @@ const descriptionKeys92 = Object.keys(rec92);
 
 const getRecordData = async (recordId) => {
   try {
+    const token = localStorage.getItem('token');
     const url = `http://localhost:5248/api/FileAPI/api/customer/GetRecordDataID?recid=${recordId}`;
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the request headers
+      },
+    });
     return response.data;
   } catch (error) {
     console.log(error);

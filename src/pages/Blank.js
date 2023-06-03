@@ -13,6 +13,7 @@ function Blank() {
   const history = useHistory();
   const onFileSelect = (e) => {
     setSelectedFile(e.target.files[0]);
+    
   };
 
   const onFileUpload = async () => {

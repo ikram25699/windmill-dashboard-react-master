@@ -7,6 +7,7 @@ import { GithubIcon, TwitterIcon } from '../icons'
 import { Label, Input, Button } from '@windmill/react-ui'
 import { useState } from 'react';
 
+
 import '../pages/override.css';
 import axios from 'axios';
 function Login() {
@@ -20,16 +21,21 @@ function Login() {
         UserName: username,
         Password: password
       });
+      const {userID, userName, userRole, name, lastName, jwtToken } = response.data;
+
+    // Store user information and token in localStorage
+    localStorage.setItem('user', JSON.stringify({userID, userName, userRole, name, lastName }));
+    localStorage.setItem('token', jwtToken);
       // Handle the response, e.g., store the token in local storage or redirect to another page
-      console.log(response.data); 
-      const userRole = response.data.userRole; // Assuming role is returned in the response
+     // console.log(response.data); 
+      //const userRole = response.data.userRole; // Assuming role is returned in the response
       if (userRole === 'User') {
         window.location.href = '/app/dashboard';
       } else if (userRole === 'Administrator') {
-        window.location.href = '/app/tables';
+        window.location.href = '/dashboardAdmin';
       } else {
         // Handle unsupported role
-        window.location.href = '/app/tables';
+        window.location.href = '/app/dashboardAdmin';
         //setErrorMessage('Unsupported role. Please contact the administrator.');
       }
       

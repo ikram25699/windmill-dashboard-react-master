@@ -54,6 +54,10 @@
 .show-file-table th {
   background-color: rgb(110,190,176);
 }
+.background-sidebar 
+{
+  background-color: white;
+}
 .description-cell {
   max-width: 400px; /* Adjust the width as needed */
   white-space: nowrap;
@@ -104,4 +108,21 @@
 .show-file-table tr:last-child td {
   border-bottom: 4px solid rgb(247, 245, 245,1.2);
   text-align: middle;
+}
+.container {
+
+  background-color: white;
+}
+.container-immg {
+  overflow: auto;
+}
+.container-immg h1 {
+  
+  color:  rgb(70, 208, 162);
+  
+}
+.container-immg img {
+  
+  float: left;
+  margin-right: 49px;
 }

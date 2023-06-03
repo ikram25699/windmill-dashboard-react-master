@@ -11,14 +11,14 @@ import {
   OutlineLogoutIcon,
   PeopleIcon
 } from '../icons'
+import { Avatar, Badge, Input, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui'
 import Care from '../assets/img/imgCor.png';
 import '../pages/override.css'
-import { Avatar, Badge, Input, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui'
-
-function Header() {
+function HeaderAdmin() {
   const [user, setUser] = useState(null);
   const { mode, toggleMode } = useContext(WindmillContext)
   const { toggleSidebar } = useContext(SidebarContext)
+  
 
   const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
@@ -43,8 +43,8 @@ function Header() {
 
   return (
     <header className="z-40 py-4 bg-white shadow-bottom dark:bg-gray-800">
-      <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
-      {user && (
+  <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
+    {user && (
       <div className="container-immg">
         <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
           <img src={Care} className="w-11 h-12 mr-4" alt="Care" />
@@ -132,8 +132,11 @@ function Header() {
               onClose={() => setIsProfileMenuOpen(false)}
             >
               <DropdownItem tag="a" href ="/profile">
+                
                 <OutlinePersonIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Profile</span>
+                
+                
               </DropdownItem>
               <DropdownItem tag="a" href="#">
                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
@@ -151,4 +154,4 @@ function Header() {
   )
 }
 
-export default Header
+export default HeaderAdmin

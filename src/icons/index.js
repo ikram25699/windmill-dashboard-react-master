@@ -17,6 +17,7 @@ import { ReactComponent as CartIcon } from './cart.svg'
 import { ReactComponent as ChatIcon } from './chat.svg'
 import { ReactComponent as MoneyIcon } from './money.svg'
 import { ReactComponent as PeopleIcon } from './people.svg'
+import { ReactComponent as PeopleCopyIcon } from './peopleCopy.svg'
 import { ReactComponent as SearchIcon } from './search.svg'
 import { ReactComponent as MoonIcon } from './moon.svg'
 import { ReactComponent as SunIcon } from './sun.svg'
@@ -47,6 +48,7 @@ export {
   ChatIcon,
   MoneyIcon,
   PeopleIcon,
+  PeopleCopyIcon,
   SearchIcon,
   MoonIcon,
   SunIcon,

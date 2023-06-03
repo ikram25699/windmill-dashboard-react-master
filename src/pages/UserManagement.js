@@ -30,16 +30,16 @@ import {
   doughnutLegends,
   lineLegends,
 } from '../utils/demo/chartsData'
+import SidebarContentAdmin from '../components/SidebarAdmin/SidebarContentAdmin'
+import HeaderAdmin from '../components/HeaderAdmin'
 import axios from 'axios'
-function Dashboard() {
-  
-  const history = useHistory();
-  const history2=useHistory();
-  const [page, setPage] = useState(1)
+import '../pages/override.css'
+const UserManagement = () => {
+  const [deletionKey, setDeletionKey] = React.useState([]);
   const [data, setData] = React.useState([]);
   const [token, setToken] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [deletionKey, setDeletionKey] = React.useState([]);
+  const history2=useHistory();
+  const history=useHistory();
   useEffect(() => {
     
     // Retrieve token from localStorage
@@ -49,78 +49,72 @@ function Dashboard() {
     }
     
   }, []);
-  const renderFile = (id) => {
-    history.push(`/file/${id}`);
-  };
- 
-  /*const show=()=>{
-    axios.get("https://localhost:7075/api/FileAPI")
-     .then(response => {
-       const data = response.data;
-      console.log(data)
-       setData(data)
-     })}
-
-     useEffect(() => {
-      show();
-      console.log(data)
-    
-    }, []);*/
-    const handleViewFile = (file) => { // new function
-      setSelectedFile(file);
-    };
-
-    const handleDeleteFile = (id) => {
-      axios
-        .delete(`http://localhost:5248/api/FileAPI/${id}`)
-        .then(response => {
-          if (response.status === 200) {
-            history2.push('/app/dashboard')
-          }
-        })
-        .catch(error => {
-          // Handle error
-          console.log(error);
-        });
-    };
-    
-
-    const show = () => {
-      const token = localStorage.getItem('token');
-      axios.get("http://localhost:5248/api/FileAPI", {
+  const handleDeleteFile = (id) => {
+    const token = localStorage.getItem('token');
+    axios
+      .delete(`http://localhost:5248/api/UserRegistration/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
       })
-        .then(response => {
-          const data = response.data;
-          console.log(data);
-          setData(data);
-        })
-        .catch(error => {
-          // Handle error
-          console.log(error);
-        });
-    };
-    useEffect(() => {
-      show();
-    }, [deletionKey]);
-  
-    
-    
+      .then(response => {
+        if (response.status === 200) {
+          history2.push('/userManagement')
+        }
+      })
+      .catch(error => {
+        // Handle error
+        console.log(error);
+      });
+  };
+  const handleEditUser = (id) => {
+    // Redirect to the update user page with the user ID
+    history.push(`/editUser/${id}`);
+  };
+  const show = () => {
+    const token = localStorage.getItem('token');
+    axios.get("http://localhost:5248/api/UserRegistration", {
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the request headers
+      },
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        setData(data);
+      })
+      .catch(error => {
+        // Handle error
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    show();
+  }, [deletionKey]);
 
   return (
-    <>
-      <PageTitle>Dashboard</PageTitle>
+    <div
+    className={`flex h-screen bg-gray-50 dark:bg-gray-900 `}
+  >
+    <div> <SidebarContentAdmin  /></div>
+    
+      
+        
+          {/* Render your sidebar component */}
+          
+          <div className="flex flex-col flex-1 w-full"> 
+          <HeaderAdmin/>
+          <>
+          <PageTitle>Utilisateurs</PageTitle>
 
       <TableContainer>
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>Nom de fichier</TableCell>
-              <TableCell>Size</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Date</TableCell>
+              <TableCell>Nom</TableCell>
+              <TableCell>Prénom</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Role</TableCell>
               <TableCell>Actions</TableCell>
             </tr>
           </TableHeader>
@@ -137,18 +131,19 @@ function Dashboard() {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm"> {data.size}</span>
+                  <p className="text-sm"> {data.lastName}</p>
+                </TableCell>
+                
+                <TableCell>
+                  <p className="text-sm">{data.userName}</p>
                 </TableCell>
                 <TableCell>
-                  <Badge type={"success"}>{data.status}</Badge>
-                </TableCell>
-                <TableCell>
-                  <span className="text-sm">{new Date(data.createdDate).toLocaleDateString()}</span>
+                  <p className="text-sm">{data.role}</p>
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center space-x-4">
-                    <Button layout="link" size="icon" aria-label="View"  onClick={() => renderFile(data.id)}>
-                      <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                    <Button layout="link" size="icon" aria-label="View" onClick={() => handleEditUser(data.id)} >
+                      <EditIcon className="w-5 h-5" aria-hidden="true" />
                     </Button>
                     <Button layout="link" size="icon" aria-label="Delete" onClick={() => handleDeleteFile(data.id)}>
                       <TrashIcon className="w-5 h-5" aria-hidden="true" />
@@ -163,10 +158,18 @@ function Dashboard() {
           
         </TableFooter>
       </TableContainer>
+      </>
+          </div>
+          
+          
+          
+          
 
+    
       
-    </>
-  )
+     
+    </div>
+  );
 }
 
-export default Dashboard
+export default UserManagement;

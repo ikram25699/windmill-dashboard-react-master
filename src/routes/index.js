@@ -1,4 +1,6 @@
 import { lazy } from 'react'
+import AddUser from '../pages/AddUser'
+
 
 
 // use lazy for better code splitting, a.k.a. load faster
@@ -12,6 +14,10 @@ const Tables = lazy(() => import('../pages/Tables'))
 const Page404 = lazy(() => import('../pages/404'))
 const Blank = lazy(() => import('../pages/Blank'))
 const ShowFile = lazy(() => import('../pages/ShowFile'))
+const DashboardAdmin = lazy(() => import('../pages/DashboardAdmin'))
+const UserManagement =lazy(() => import('../pages/UserManagement'))
+const ProfilePage =lazy(() => import('../pages/UserProfile'))
+const EditUser =lazy(() => import('../pages/EditUser'))
 /**
  * ⚠ These are internal routes!
  * They will be rendered inside the app, using the default `containers/Layout`.
@@ -27,6 +33,23 @@ const routes = [
     path: '/dashboard', // the url
     component: Dashboard, // view rendered
   },
+  {
+    path: '/dashboardAdmin', // the url
+    component: DashboardAdmin, // view rendered
+  },
+  {
+    path: '/profile', // the url
+    component: ProfilePage, // view rendered
+  },
+  {
+    path: '/userManagement', // the url
+    component: UserManagement, // view rendered
+  },
+  {
+    path: '/editUser/:id', // the url
+    component: EditUser, // view rendered
+  },
+ 
   {
     path: '/file/:id', // the url
     component: ShowFile, // view rendered
