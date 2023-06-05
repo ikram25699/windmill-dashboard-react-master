@@ -49,7 +49,7 @@ function Header() {
         <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
           <img src={Care} className="w-11 h-12 mr-4" alt="Care" />
           
-            Bonjour {user.lastName} {user.name} !
+            Bonjour, {user.lastName} {user.name} !
         </h1>
       </div>
     )}

@@ -236,7 +236,16 @@ useEffect(() => {
 
   fetchData();
 }, [Attestation]);
-
+const getZoneDescription = async (code) => {
+  try {
+    const url = `http://localhost:5004/api/ZoneDesc?code=${code}`;
+    const response = await axios.get(url);
+    return response.data.description;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 // ...
 // Your remaining code
 
@@ -312,6 +321,7 @@ const renderAttestations = (data) => {
                       <h3 style={{ position: 'relative', display: 'inline-block', padding: '0.5em', marginLeft: '0.5em',color:'white',backgroundColor:'#F7A19A' }} key={error.id}>
                         <span style={{ position: 'absolute', top: 0, left: '-0.5em', width: '0.3em', height: '100%', backgroundColor: '#DF4337' }}></span>
                         {error.libelle}
+                        {error.codeErreur}
                       </h3>
                       
                       
