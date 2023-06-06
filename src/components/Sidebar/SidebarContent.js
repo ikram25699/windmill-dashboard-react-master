@@ -23,6 +23,17 @@ function SidebarContent() {
   const history = useHistory();
   const [token, setToken] = useState('');
   const [fileName, setFileName] = useState('');
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    // Retrieve user information from localStorage
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+
+    // Retrieve token from localStorage
+    
+  }, []);
   
   useEffect(() => {
     
@@ -42,11 +53,12 @@ function SidebarContent() {
 
   const onFileUpload = async () => {
     const token = localStorage.getItem('token');
-    
+    const user = localStorage.getItem('user');
+    //const userId = user.userID;
       const formData = new FormData();
       formData.append('file', selectedFile);
       try {
-      const response = await axios.post('http://localhost:5248/api/FileAPI', formData, {
+      const response = await axios.post('http://localhost:5248/api/FileAPI/1', formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the request headers
         },

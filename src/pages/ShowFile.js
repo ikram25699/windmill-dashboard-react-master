@@ -24,6 +24,10 @@ const ShowFile = () => {
     const toggleShowMoreRecord = () => setShowMoreRecord(!showMoreRecord);
     const [recordErrors, setRecordErrors] = useState({});
     const [token, setToken] = useState('');
+    const [errors, setErrors] = useState([])
+    const [zoneDescriptions, setZoneDescriptions] = useState(new Map());
+    const [zoneDescriptionsMap, setZoneDescriptionsMap] = useState(new Map());
+
     useEffect(() => {
     
       // Retrieve token from localStorage
@@ -207,7 +211,7 @@ const getRecordErrorsByID = async (recordId) => {
   };
 
   fetchData();
-}, [Attestation]);*/
+}, [Attestation]);///*/
 
 
 useEffect(() => {
@@ -232,26 +236,60 @@ useEffect(() => {
 
     setRecordData(updatedRecordData);
     setRecordErrors(updatedRecordErrors);
+    fetchZoneDescriptions(Attestation);
   };
 
   fetchData();
 }, [Attestation]);
-const getZoneDescription = async (code) => {
+
+
+const fetchZoneDescription = async (code) => {
   try {
     const url = `http://localhost:5004/api/ZoneDesc?code=${code}`;
     const response = await axios.get(url);
-    return response.data.description;
+    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.log(error);
     return null;
   }
 };
-// ...
-// Your remaining code
+
+
+
+const fetchZoneDescriptions = async (data) => {
+  const updatedZoneDescriptions = new Map();
+
+  for (const item of data) {
+    for (const record of item.attestationRecords) {
+      const errors = await getRecordErrorsByID(record.id);
+      if (errors) {
+        for (const error of errors) {
+          const codeErreur = error.codeErreur; // Remove leading zeros if they exist
+          
+          
+          const middleNumbers = codeErreur.slice(2, 4).replace(/^0+/, '');; // Extract middleNumbers and remove leading zeros if they exist
+                      // Extract middleNumbers and remove leading zeros if they exist
+
+          if (!updatedZoneDescriptions.has(middleNumbers)) {
+            const description = await fetchZoneDescription(middleNumbers);
+            if (description) {
+              updatedZoneDescriptions.set(middleNumbers, description);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  setZoneDescriptions(updatedZoneDescriptions);
+};
+
 
 //render attests
 const renderAttestations = (data) => {
   
+  const zoneDescriptionsMap = new Map([...zoneDescriptions]);
   
  
 
@@ -282,6 +320,7 @@ const renderAttestations = (data) => {
             (errorItem) => errorItem.recordId === record.id
           );
           const errors = recordErrorsItem ? recordErrorsItem.errors : null;
+         
 
           
 
@@ -317,16 +356,34 @@ const renderAttestations = (data) => {
               <br></br>
               {errors  && (
                   <div>
-                    {errors.map((error) => (
+                    {errors.map((error) => {
+                      // Get the middle numbers of the error code
+                      const codeErreur = error.codeErreur; // Remove leading zeros if they exist
+                      const middleNumbers = codeErreur.slice(2, 4).replace(/^0+/, ''); // Extract middleNumbers and remove leading zeros if they exist
+                      const description = zoneDescriptionsMap.get(middleNumbers);
+                      
+
+                   return(
+                    <div key={error.id}>
                       <h3 style={{ position: 'relative', display: 'inline-block', padding: '0.5em', marginLeft: '0.5em',color:'white',backgroundColor:'#F7A19A' }} key={error.id}>
+                        
                         <span style={{ position: 'absolute', top: 0, left: '-0.5em', width: '0.3em', height: '100%', backgroundColor: '#DF4337' }}></span>
+                        {error.codeErreur} :
                         {error.libelle}
-                        {error.codeErreur}
+
+                        
+                        
                       </h3>
+                       {description  && (
+                        <div style={{ fontSize: '18px', color: 'red' }} >
+                          Zone erronée: {description}
+                        </div>
+                      )}
+                      </div>
                       
                       
                       
-                    ))}
+                    )})}
                     <br></br>
                     <br></br>
                   </div>
@@ -359,7 +416,7 @@ const renderAttestations = (data) => {
               
             />
     <br></br>
-     <h1 style={{ fontSize: '25px',color:'#08BBAA'}} class="custom-heading"> Header</h1>
+     <h1 style={{ fontSize: '25px',color:'#08BBAA'}} className="custom-heading"> Header</h1>
     <br></br>
      <h2 class="record-heading" > Segment 200 </h2>
      <table className="show-file-table" >
