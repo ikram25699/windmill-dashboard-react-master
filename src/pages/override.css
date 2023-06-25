@@ -126,3 +126,106 @@
   float: left;
   margin-right: 49px;
 }
+
+.input {
+  height: 150px; /* Adjust the height as needed */
+  padding-top: 0.5rem; /* Adjust the padding as needed */
+  resize: vertical; /* Allow vertical resizing if desired */
+  box-sizing: border-box; /* Ensure the height includes padding and border */
+}
+.marker::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -12px;
+  width: 4px;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.2);
+  z-index: -1;
+}
+
+.white-box {
+  background-color: white;
+  padding: 10px;
+  border: 0.5px solid rgb(205, 203, 203);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+}
+.page-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.sidebar-right {
+  flex-basis: 50%;
+  background-color: rgb(255, 255, 255);
+  border: 0.5px solid rgb(205, 203, 203);
+  
+  padding: 20px;
+  padding-right: 1cm;
+  height: 100%;
+}
+.message-container {
+  display: flex;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: 10px;
+  width: 92%;
+  margin-left: 20px;
+}
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: 10px;
+  width: 92%;
+  margin-left: 20px;
+}
+
+.message-input {
+  flex-grow: 1;
+  resize: none;
+  margin-right: 10px;
+  border: 0.5px solid rgb(205, 203, 203);
+  margin-bottom: 30px;
+
+  border-radius: 10px;
+  background-color:white;
+}
+.ticket-chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.chat-interface {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.sender {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.message-text-box {
+  background-color: rgb(248, 248, 248);
+  border-radius: 8px;
+  border: 0.1px solid rgb(242, 239, 239);
+  
+  padding: 10px;
+  margin-right: 38px;
+}
+.message-bubble{
+
+  margin-bottom: 39px;
+}
+.timestamp{
+  font-size: 11px;
+  font-weight: bold;
+  color: dimgrey;
+
+}

@@ -11,6 +11,11 @@ const routes = [
     icon: 'HomeIcon', // the component being exported from icons/index.js
     name: 'Dashboard', // name that appear in Sidebar
   },
+  {
+    path: '/app/tickets', // the url
+    icon: 'FormsIcon', // the component being exported from icons/index.js
+    name: 'Tickets', // name that appear in Sidebar
+  },
  /* {
     path: '/app/forms',
     icon: 'FormsIcon',
@@ -32,7 +37,7 @@ const routes = [
     path: '/app/tables',
     icon: 'TablesIcon',
     name: 'Tables',
-  },*/
+  },
   {
     icon: 'PagesIcon',
     name: 'Pages',
@@ -56,7 +61,7 @@ const routes = [
         name: 'Blank',
       },
     ],
-  },
+  },*/
 ]
 
 export default routes

@@ -53,12 +53,15 @@ function SidebarContent() {
 
   const onFileUpload = async () => {
     const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    //const userId = user.userID;
+    //const user = localStorage.getItem('storedUser');
+    console.log(token);
+    //console.log(user.userName);
+    const userId = user.userID;
+    console.log(userId);
       const formData = new FormData();
       formData.append('file', selectedFile);
       try {
-      const response = await axios.post('http://localhost:5248/api/FileAPI/1', formData, {
+      const response = await axios.post('http://localhost:5248/api/FileAPI/'+userId, formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the request headers
         },

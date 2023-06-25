@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import AddUser from '../pages/AddUser'
+import ViewTicketAdmin from '../pages/viewTicketAdmin'
 
 
 
@@ -18,6 +19,12 @@ const DashboardAdmin = lazy(() => import('../pages/DashboardAdmin'))
 const UserManagement =lazy(() => import('../pages/UserManagement'))
 const ProfilePage =lazy(() => import('../pages/UserProfile'))
 const EditUser =lazy(() => import('../pages/EditUser'))
+const Tickets =lazy(() => import('../pages/Tickets'))
+const viewTicket =lazy(() => import('../pages/viewTicket'))
+const TicketsAdmin =lazy(() => import('../pages/TicketsAdmin'))
+const viewTicketAdmin =lazy(() => import('../pages/viewTicketAdmin'))
+const TicketChat =lazy(() => import('../pages/TicketChat'))
+const TicketChatUser =lazy(() => import('../pages/TicketChatUser'))
 /**
  * ⚠ These are internal routes!
  * They will be rendered inside the app, using the default `containers/Layout`.
@@ -34,8 +41,32 @@ const routes = [
     component: Dashboard, // view rendered
   },
   {
+    path: '/viewticket/:id', // the url
+    component: viewTicket, // view rendered
+  },
+  {
+    path: '/ticketChat/:id', // the url
+    component: TicketChat, // view rendered
+  },
+  {
+    path: '/ticketChatUser/:id', // the url
+    component: TicketChatUser, // view rendered
+  },
+  {
+    path: '/viewticketAdmin/:id', // the url
+    component: viewTicketAdmin, // view rendered
+  },
+  {
+    path: '/tickets', // the url
+    component: Tickets, // view rendered
+  },
+  {
     path: '/dashboardAdmin', // the url
     component: DashboardAdmin, // view rendered
+  },
+  {
+    path: '/ticketsAdmin', // the url
+    component: TicketsAdmin, // view rendered
   },
   {
     path: '/profile', // the url

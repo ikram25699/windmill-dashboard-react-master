@@ -11,6 +11,7 @@ import {
   OutlineLogoutIcon,
   PeopleIcon
 } from '../icons'
+import { useHistory } from 'react-router-dom';
 import { Avatar, Badge, Input, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui'
 import Care from '../assets/img/imgCor.png';
 import '../pages/override.css'
@@ -18,7 +19,7 @@ function HeaderAdmin() {
   const [user, setUser] = useState(null);
   const { mode, toggleMode } = useContext(WindmillContext)
   const { toggleSidebar } = useContext(SidebarContext)
-  
+  const history = useHistory();
 
   const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
@@ -40,6 +41,13 @@ function HeaderAdmin() {
   function handleProfileClick() {
     setIsProfileMenuOpen(!isProfileMenuOpen)
   }
+  const handleLogout = () => {
+    // Clear user information from localStorage
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    // Redirect to the login page
+    history.push('/login');
+  };
 
   return (
     <header className="z-40 py-4 bg-white shadow-bottom dark:bg-gray-800">
@@ -142,8 +150,8 @@ function HeaderAdmin() {
                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Settings</span>
               </DropdownItem>
-              <DropdownItem onClick={() => alert('Log out!')}>
-                <OutlineLogoutIcon className="w-4 h-4 mr-3" aria-hidden="true" />
+              <DropdownItem  onClick={handleLogout}>
+                <OutlineLogoutIcon className="w-4 h-4 mr-3" aria-hidden="true"    />
                 <span>Log out</span>
               </DropdownItem>
             </Dropdown>

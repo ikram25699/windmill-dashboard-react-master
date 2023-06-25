@@ -9,6 +9,11 @@ const routes = [
         icon: 'PeopleCopyIcon', // the component being exported from icons/index.js
         name: 'Gestion de profils', // name that appear in Sidebar
       },
+      {
+        path: '/ticketsAdmin', // the url
+        icon: 'FormsIcon', // the component being exported from icons/index.js
+        name: 'Gestion de tickets', // name that appear in Sidebar
+      },
 /*
     {
       path: '/addUser',
